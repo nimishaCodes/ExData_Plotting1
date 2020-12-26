@@ -1,0 +1,14 @@
+
+
+#read the entire data 
+data_original <- read.csv("household_power_consumption.txt", header=T, sep=';', na.strings="?", 
+                      nrows=2075259, check.names=F, stringsAsFactors=F, comment.char="", quote='\"')
+#subset data for required dates
+data_required <- subset(data_original, Date %in% c("1/2/2007","2/2/2007"))
+#format date to date/month/year
+data_required$Date <- as.Date(data_required$Date, format="%d/%m/%Y")
+#draw the histogram plot
+hist(data_required$Global_active_power, main="Global Active Power",xlab="Global Active Power (kilowatts)", ylab="Frequency", col="Red")
+#set dimensions of plot 
+png("plot1.png", width=480, height=480)
+dev.off()
