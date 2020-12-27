@@ -7,8 +7,9 @@ data_original <- read.csv("household_power_consumption.txt", header=T, sep=';', 
 data_required <- subset(data_original, Date %in% c("1/2/2007","2/2/2007"))
 #format date to date/month/year
 data_required$Date <- as.Date(data_required$Date, format="%d/%m/%Y")
-#draw the histogram plot
+#produce the histogram graph
 hist(data_required$Global_active_power, main="Global Active Power",xlab="Global Active Power (kilowatts)", ylab="Frequency", col="Red")
-#set dimensions of plot 
-png("plot1.png", width=480, height=480)
+#call dev.copy with necessary arguments 
+dev.copy(png, file="plot1.png", height=480, width=480)
+#now write the plot to the file (plot1.png)
 dev.off()
