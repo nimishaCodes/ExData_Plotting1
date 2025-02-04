@@ -114,3 +114,91 @@ The four plots that you will need to construct are shown below.
 
 ![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5.png) 
 
+
+Certainly! Here's a **clear and concise summary** of what your CloudFormation stack does, written in a way that you can include in your GitHub repository's README or documentation:
+
+---
+
+## **CloudFormation Stack: Image Classification Pipeline**
+
+This CloudFormation template automates the deployment of an **image classification pipeline** using AWS services. It sets up the infrastructure required to:
+1. **Upload images** to an S3 bucket.
+2. **Process images** using a SageMaker endpoint.
+3. **Store classification results** in a DynamoDB table.
+4. **Send notifications** via SNS when processing is complete.
+
+---
+
+### **Key Components**
+1. **S3 Bucket**:
+   - Users upload images to this bucket.
+   - Automatically triggers a Lambda function when new images are uploaded.
+
+2. **Lambda Function**:
+   - Processes uploaded images.
+   - Invokes a SageMaker endpoint for image classification.
+   - Stores the classification results in a DynamoDB table.
+   - Sends notifications via SNS.
+
+3. **SageMaker Endpoint**:
+   - Hosts the machine learning model for image classification.
+   - The Lambda function sends image data to this endpoint and receives classification results.
+
+4. **DynamoDB Table**:
+   - Stores the results of the image classification (e.g., image ID and classification labels).
+
+5. **SNS Topic**:
+   - Sends email notifications to a specified email address when image processing is complete.
+
+6. **IAM Roles and Policies**:
+   - Ensures the Lambda function has the necessary permissions to interact with S3, DynamoDB, SNS, and SageMaker.
+
+---
+
+### **How It Works**
+1. A user uploads an image to the S3 bucket.
+2. The S3 bucket triggers the Lambda function.
+3. The Lambda function:
+   - Reads the image from S3.
+   - Sends the image to the SageMaker endpoint for classification.
+   - Stores the classification results in DynamoDB.
+   - Sends a notification via SNS.
+4. The user receives an email notification with the classification results.
+
+---
+
+### **Deployment**
+To deploy this stack:
+1. Update the `Parameters` section in the CloudFormation template with your specific values (e.g., SageMaker endpoint ARN, notification email).
+2. Deploy the template using the AWS Management Console, AWS CLI, or AWS SDK.
+
+---
+
+### **Outputs**
+After deployment, the stack outputs the following:
+- **DynamoDB Table Name**: The table where classification results are stored.
+- **SNS Topic ARN**: The ARN of the SNS topic for notifications.
+- **Lambda Function Name**: The name of the Lambda function that processes images.
+- **S3 Bucket Name**: The bucket where users upload images.
+
+---
+
+### **Use Cases**
+- **Image Classification**: Automate the classification of user-uploaded images using a pre-trained SageMaker model.
+- **Notifications**: Notify users via email when their images have been processed.
+- **Data Storage**: Store classification results for future analysis or retrieval.
+
+---
+
+### **Dependencies**
+- A pre-trained SageMaker endpoint for image classification.
+- An S3 bucket for storing the Lambda function code (if not included in the template).
+
+---
+
+This stack is designed to be **scalable, secure, and easy to maintain**, making it ideal for projects involving image processing and machine learning.
+
+---
+
+Feel free to customize this summary further to match your repository's style! Let me know if you need additional details or enhancements.
+
